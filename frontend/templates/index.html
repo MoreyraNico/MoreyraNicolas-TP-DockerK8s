@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Usuarios - TP Docker & K8s</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Gestión de Usuarios</h1>
+        <p class="subtitle">Frontend Flask + Backend FastAPI + PostgreSQL</p>
+        <p class="subtitle" style="font-size: 0.85rem; color: #2563eb;">
+            Atendido por Frontend Replica: <strong>{{ replica_id }}</strong>
+        </p>
+
+        <!-- Formulario para Crear o Editar -->
+        <form id="userForm" class="card">
+            <h2 id="formTitle">Nuevo Usuario</h2>
+            <input type="hidden" id="userId">
+            
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" placeholder="Ej. Nicolás Moreyra" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Ej. nicolas@mail.com" required>
+            </div>
+
+            <div class="buttons">
+                <button type="submit" id="submitBtn" class="btn-primary">Guardar Usuario</button>
+                <button type="button" id="cancelBtn" class="btn-secondary hidden">Cancelar Edición</button>
+            </div>
+        </form>
+
+        <!-- Mensaje de estado / errores -->
+        <div id="alertBox" class="alert hidden"></div>
+
+        <!-- Tabla de Listado -->
+        <div class="card">
+            <h2>Usuarios Registrados</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="usersTableBody">
+                    <!-- Se llena dinámicamente con JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Inyectamos la URL del backend desde Flask hacia JS -->
+    <script>
+        const API_URL = "{{ backend_url }}";
+    </script>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
